@@ -1,0 +1,147 @@
+<script>
+function pageTo(page){
+	var p = $("#"+page);
+	var offset = p.offset();
+	console.log(offset.top);
+	$("html, body").animate({
+	        scrollTop: offset.top+"px"
+	    }, 1000);
+
+	return false;
+}
+
+$(window).scroll(function(){
+      if ($(this).scrollTop() > 50) {
+          $('.generalMenu').addClass('fixed');
+      } else {
+          $('.generalMenu').removeClass('fixed');
+      }
+});
+
+$(document).ready(function(){
+	$("section").addClass('hidden').viewportChecker({
+	    classToAdd: 'visible animated fadeInUp', 
+
+	    removeClassAfterAnimation: false, // Remove added classes after animation has finished
+	    offset: 10, // The offset of the elements (let them appear earlier or later). This can also be percentage based by adding a '%' at the end
+	    invertBottomOffset: true, // Add the offset as a negative number to the element's bottom
+	    repeat: false, // Add the possibility to remove the class if the elements are not visible
+	    callbackFunction: function(elem, action){}, // Callback to do after a class was added to an element. Action will return "add" or "remove", depending if the class was added or removed
+		scrollHorizontal: false // Set to true if your website scrolls horizontal instead of vertical.
+	});
+});
+
+var slideNow = 1;
+var slideCount = 3;
+var slideInterval = 30000;
+var navBtnId = 0;
+var translateWidth = 0;
+
+$(document).ready(function ($) {
+
+	 var switchInterval = setInterval(nextSlide, slideInterval);
+
+    $('.slider').hover(function() {
+        clearInterval(switchInterval);
+    }, function() {
+        switchInterval = setInterval(nextSlide, slideInterval);
+    });
+
+    $('.next-btn').click(function() {
+        nextSlide();
+    });
+
+    $('.prev-btn').click(function() {
+        prevSlide();
+    });
+
+
+
+function nextSlide() {
+    if (slideNow == slideCount || slideNow <= 0 || slideNow > slideCount) {
+        $('.slides_wrapper').css('transform', 'translate(0, 0)');
+        slideNow = 1;
+    } else {
+        translateWidth = -$('.slider').width() * (slideNow);
+        $('.slides_wrapper').css({
+            'transform': 'translate(' + translateWidth + 'px, 0)',
+            '-webkit-transform': 'translate(' + translateWidth + 'px, 0)',
+            '-ms-transform': 'translate(' + translateWidth + 'px, 0)',
+        });
+        slideNow++;
+    }
+}
+
+function prevSlide() {
+    if (slideNow == 1 || slideNow <= 0 || slideNow > slideCount) {
+        translateWidth = -$('.slider').width() * (slideCount - 1);
+        $('.slides_wrapper').css({
+            'transform': 'translate(' + translateWidth + 'px, 0)',
+            '-webkit-transform': 'translate(' + translateWidth + 'px, 0)',
+            '-ms-transform': 'translate(' + translateWidth + 'px, 0)',
+        });
+        slideNow = slideCount;
+    } else {
+        translateWidth = -$('.slider').width() * (slideNow - 2);
+        $('.slides_wrapper').css({
+            'transform': 'translate(' + translateWidth + 'px, 0)',
+            '-webkit-transform': 'translate(' + translateWidth + 'px, 0)',
+            '-ms-transform': 'translate(' + translateWidth + 'px, 0)',
+        });
+        slideNow--;
+    }
+}
+
+
+$(".iteams .iteam").on("click", function(e) {
+    var href = $(this).find('img').attr('src')
+    mrgallery.open(href);
+    return false;
+});
+
+
+var mrgallery = {
+  open: function(href){
+    $('body').append('<div class="MrGallery animated fadeIn" onclick="this.remove()"><div class="ImgOpened animated jackInTheBox" style="background-image:url(\''+href+'\');"></div></div>')
+    return false;
+  },
+ close: function(e){
+    $(e).remove();
+    return false;
+  }
+}
+
+});  
+</script>
+<div id="bgfon"><div class="overlay"></div></div>
+<%if back %>
+<header class="header animated fadeIn">
+	<a href="/" class="logo animated bounceIn"></a>
+	<nav class="generalMenu animated fadeInDown">
+		<a href="/#home" class="iteam">Главная</a>
+		<a href="/#projects" class="iteam">Проекты</a>
+		<a href="/#uslugi" class="iteam">Услуги</a>
+		<a href="/#about" class="iteam">О нас</a>
+		<a href="/#contacts" class="iteam">Контакты</a>
+	</nav>
+	<div class="contacts">
+		<div class="phone"><small>(4742)</small> 36-48-78</div>
+		<div class="adress">г. Липецк, ул. Ковалёва, 115/2</div>
+	</div>
+</header>
+<% else %>
+<header class="header animated fadeIn">
+	<a href="/" class="logo animated bounceIn"></a>
+	<nav class="generalMenu animated fadeInDown">
+		<a href="" class="iteam" onclick="return pageTo('home');">Главная</a>
+		<a href="" class="iteam" onclick="return pageTo('projects');">Проекты</a>
+		<a href="" class="iteam" onclick="return pageTo('uslugi');">Услуги</a>
+		<a href="" class="iteam" onclick="return pageTo('about');">О нас</a>
+		<a href="" class="iteam" onclick="return pageTo('contacts');">Контакты</a>
+	</nav>
+	<div class="contacts">
+		<div class="phone"><small>(4742)</small> 36-48-78</div>
+		<div class="adress">г. Липецк, ул. Ковалёва, 115/2</div>
+	</div>
+</header>
+<% end %>

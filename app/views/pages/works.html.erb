@@ -1,0 +1,30 @@
+<% content_for :title, 'ООО «Капиталстрой» - Наши работы' %>
+<%= render partial: 'application/header', locals: {back: true}%>
+<section class="page" id="page">
+  <div class="content">
+    <h1>ПРОЕКТЫ</h1>
+    <p>На счету предприятия – строительство многих социально значимых объектов: здания
+«Роспотребнадзора» на улице Гагарина в городе Липецке, аварийно-диспетчерской
+службы «Липецкоблгаз», отделения Пенсионного фонда в Липецке, Задонске и Лебедяни,
+Домов культуры в селах Порой (Добровский район), Донское (Задонский район),
+Сторожевые Хутора (Усманский район) и Казинка (Грязинский район).</p>
+
+    <% Category.where(id:[1,2]).each do |category| %>
+      <div class="iteams">
+        <% category.galleries.limit(25).each do |gallery| %>
+        <div class="iteam">
+          <div class="img">
+          <%= image_tag gallery.image.url %>
+          <div class="title"><%= gallery.title %>
+            <small>объект</small>
+          </div>
+        </div>
+        </div>
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+</section>
+
+<%= render partial: 'application/footer' %>

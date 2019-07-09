@@ -1,0 +1,26 @@
+<% content_for :title, @gallery.title %>
+<%= render partial: 'application/header', locals: {back: true}%>
+<section class="uslugi" id="uslugi">
+  <div class="content">
+
+<p id="notice"><%= notice %></p>
+
+    <h2><%= @gallery.title %></h2>
+    <p><%= @gallery.description.html_safe %></p>
+
+<p>
+  <strong>Цена:</strong>
+  <%= @gallery.slave %>
+</p>
+<p>
+  <strong>Характеристики:</strong>
+  <%= @gallery.url.html_safe %>
+</p>
+
+<p><strong>Фото:</strong></p>
+    <%= image_tag @gallery.image.url %>
+
+
+</div>
+</section>
+<%= render partial: 'application/footer', locals: {back: true}%>

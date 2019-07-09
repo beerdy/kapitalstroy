@@ -1,0 +1,110 @@
+<% content_for :title, 'ООО «Капиталстрой»' %>
+<%= render partial: 'application/header', locals: {back: false}%>
+<section class="hello" id="home">
+	<div class="content">
+		<h1>Один из лидеров<br> в сфере строительства</h1>
+		<p>ООО «Капиталстрой» уже более 20 лет успешно работает на строительном рынке Липецкой области, реализуя значимые проекты</p>
+		<a href="/pages/about" class="buttonA">Подробнее</a>
+		<div class="slider">
+			<div class="buttons">
+				<div class="prev-btn">←</div>
+				<div class="next-btn">→</div>
+			</div>
+			<ul class="slides_wrapper">	
+
+			    <% Slider.limit(4).each do |gallery| %>
+			    <li class="slide">
+			    	<div class="img"><%= image_tag gallery.image.url %></div>
+			    	<div class="overlay"></div>
+					<div class="title">
+						<div class="category">ОБЪЕКТ</div>
+						<%= gallery.description %>
+					</div>
+			    </li>
+			    <% end %>
+			</ul>
+		</div>
+	</div>
+</section>
+
+
+<section class="projects" id="projects">
+	<div class="content">
+		<h2><small>проекты</small>Многолетний опыт работы предприятия</h2>
+		<% Category.where(id:[1,2]).each do |category| %>
+		  <div class="iteams">
+		    <% category.galleries.limit(3).each do |gallery| %>
+		    <div class="iteam">
+		    	<div class="img">
+					<%= image_tag gallery.image.url %>
+					<div class="title"><%= gallery.title %>
+						<small>объект</small>
+					</div>
+				</div>
+		    </div>
+		    <% end %>
+		  </div>
+		<% end %>
+		<a href="/pages/works" class="buttonB">Все проекты</a>
+	</div>
+</section>
+
+<section class="uslugi" id="uslugi">
+	<div class="content">
+		<h2><small>услуги</small>Прочные позиции на строительном рынке</h2>
+		<p>Многолетний опыт работы предприятия в совокупности с большой командой мастеров гарантируют высокое качество выполняемых работ и позволяют говорить об ООО «Капиталстрой» как об одном из региональных лидеров в сфере строительства.</p>
+		<div class="usligi_list">
+			<a href="/">
+				<div class="ico"></div>
+				<div class="text">Общестроительные, сантехнические, электромонтажные работы</div>
+			</a>
+			<a href="/">
+				<div class="ico"></div>
+				<div class="text">Функции генерального подрядика</div>
+			</a>
+			<a href="/">
+				<div class="ico"></div>
+				<div class="text">Изготовление и монтаж изделий из ПВХ и аллюминиевого профиля</div>
+			</a>
+			<a href="/">
+				<div class="ico"></div>
+				<div class="text">Изготовление и монтаж металлоконструкций</div>
+			</a>
+		</div>
+	</div>
+</section>
+
+<section class="about" id="about">
+	<div class="content">
+		<h2><small>мы</small>КАПИТАЛСТРОЙ</h2>
+			<p>С момента основания компании в 1997 году прошло уже более 20 лет. За это время «Капиталстрой» преодолел большой путь развития и превратился из маленькой компании со штатом в 13 человек в крупную строительную организацию, асчитывающую более 200 высококлассных специалистов.</p>
+			<p>Компания располагает большим парком
+строительной и специализированной техники, а также собственной производственной
+базой, включающей цех по изготовлению металлоконструкций, участки по производству
+пластиковых окон и алюминиевых витражей,
+электро- и сантехнических систем.</p>
+<p>Сегодня «Капиталстрой» уже прочно закрепился на строительном рынке Липецкой
+области и завоевал высокую деловую репутацию. </p>
+	</div>
+</section>
+
+<section class="contacts" id="contacts">
+	<div class="content">
+		<h2><small>наши</small>Контакты</h2>
+		<div class="map">
+			<iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A5e7cfff996374d3db9da3cb6d82b8bd31de33131903400d9eee15983bef8b647&amp;source=constructor" width="100%" height="400" frameborder="0"></iframe>
+		</div>
+		<div class="contactsinfo">
+			<h3>Адресс</h3>
+			<div class="name">ООО «Капиталстрой»</div>
+			<div class="adress">Правобережный округ, г. Липецк, ул. Ковалёва, 115/2</div>
+			<br><br><h3>Телефон</h3>
+			<div class="phonene">(4742) 36-48-78<br>(4742) 36-48-80
+			</div>
+			<br><br><h3>Почта</h3>
+			<div class="mail">kapitalstroi1997@yandex.ru</div>
+		</div>
+	</div>
+</section>
+
+<%= render partial: 'application/footer', locals: {back: false}%>
